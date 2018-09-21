@@ -1,0 +1,7 @@
+Word Count
+// Create an RDD
+val rdd : RDD[String] = spark.textFile("hdfs://..") 
+
+val count : RDD[String] = rdd.flatMap(arg => arg.split(" "))   // separate text into words
+                             .map(word => (word, 1))           // pair each word with 1
+                             .reduceByKey(_ + _)               // sum up the 1s in the pairs
